@@ -12,14 +12,18 @@ describe('Settings page', () => {
   const VALID_PASSWORD = 'P@sswOrd1';
 
   before(() => {
-    cy.task('generateUser').then((generateUser) => {
-      user = generateUser;
-      return cy.register(user.email, user.username, user.password);
-    });
-
-    cy.task('generateSettings').then((generateSettings) => {
-      settings = generateSettings;
-    });
+    return cy
+      .task('generateUser')
+      .then((generateUser) => {
+        user = generateUser;
+        return cy.register(user.email, user.username, user.password);
+      })
+      .then(() => {
+        return cy.task('generateSettings');
+      })
+      .then((generateSettings) => {
+        settings = generateSettings;
+      });
   });
 
   beforeEach(() => {

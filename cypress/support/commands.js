@@ -39,7 +39,7 @@ Cypress.Commands.add(
     username = 'riot',
     password = '12345Qwert!'
   ) => {
-    cy.request('POST', '/users', {
+    return cy.request('POST', '/users', {
       email,
       username,
       password
@@ -116,9 +116,9 @@ function initFavorite(articleSlug, action) {
 }
 
 Cypress.Commands.add('setFavorite', (slug) => {
-  initFavorite(slug, 'set');
+  return initFavorite(slug, 'set');
 });
 
 Cypress.Commands.add('unsetFavorite', (slug) => {
-  initFavorite(slug, 'unset');
+  return initFavorite(slug, 'unset');
 });

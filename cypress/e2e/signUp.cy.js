@@ -18,10 +18,11 @@ describe('Sign Up page', () => {
   before(() => {
     invalidEmail = faker.string.alphanumeric(10);
     validEmail = faker.internet.email();
-    cy.task('db:clear');
-    cy.task('generateUser').then((generateUser) => {
-      user = generateUser;
-    });
+    cy.task('db:clear')
+      .then(() => cy.task('generateUser'))
+      .then((generateUser) => {
+        user = generateUser;
+      });
   });
 
   beforeEach(() => {

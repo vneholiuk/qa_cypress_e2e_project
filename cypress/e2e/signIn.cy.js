@@ -15,8 +15,10 @@ describe('Sign In page', () => {
   before(() => {
     invalidEmail = faker.internet.email({ allowUnicode: false });
     invalidPassword = faker.internet.password();
+
     cy.task('db:clear');
-    cy.task('generateUser').then((generateUser) => {
+
+    return cy.task('generateUser').then((generateUser) => {
       user = generateUser;
       return cy.register(user.email, user.username, user.password);
     });

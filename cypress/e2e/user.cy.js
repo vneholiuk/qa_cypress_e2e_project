@@ -15,11 +15,14 @@ describe('User', () => {
   let article;
 
   before(() => {
-    cy.task('db:clear');
-    cy.register(EMAIL, USERNAME, VALID_PASSWORD).then((response) => {
-      user = response.body.user;
-    });
-    homePage.visit();
+    cy.task('db:clear')
+      .then(() => cy.register(EMAIL, USERNAME, VALID_PASSWORD))
+      .then((response) => {
+        user = response.body.user;
+      })
+      .then(() => {
+        homePage.visit();
+      });
   });
 
   beforeEach(() => {
